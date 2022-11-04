@@ -11,8 +11,7 @@ public interface OsrsPlayerCountConfig extends Config
 	@ConfigItem(
 			keyName = "refreshInterval",
 			name = "Refresh interval",
-			description = "Controls the time in seconds before the player count gets retrieved from the OSRS home page.",
-			position = 7
+			description = "Controls the time in seconds before the player count gets retrieved from the OSRS home page."
 	)
 	@Range(
 			min = 60,

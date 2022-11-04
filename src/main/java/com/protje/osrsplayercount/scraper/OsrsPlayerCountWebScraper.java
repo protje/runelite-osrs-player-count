@@ -21,18 +21,17 @@ public class OsrsPlayerCountWebScraper {
 	static final String OSRS_HOMEPAGE_URL = "https://oldschool.runescape.com/";
 	static final Pattern OSRS_PLAYER_COUNT_PATTERN = Pattern.compile("^There are currently ([\\d,]+) people playing!$");
 
+	@Inject
+	private OsrsPlayerCountConfig config;
 	private WebClient webClient;
 	private String playerCount;
-	private int refetchInterval;
 	private long lastCheckedTime;
 
 	@Inject
-	public OsrsPlayerCountWebScraper(OsrsPlayerCountConfig config) {
+	public OsrsPlayerCountWebScraper() {
 		this.webClient = new WebClient();
 		this.webClient.getOptions().setCssEnabled(false);
 		this.webClient.getOptions().setJavaScriptEnabled(false);
-//		Time from the config is in seconds, so it gets multiplied it by 1000 to get it in milliseconds
-		this.refetchInterval = config.refreshInterval() * 1000;
 	}
 
 	private long getTimestamp() {
@@ -47,7 +46,8 @@ public class OsrsPlayerCountWebScraper {
 	 */
 	public String getPlayerCount() {
 		// We only want to re-scrape after the set amount of time
-		if(this.getTimestamp() - this.lastCheckedTime >= refetchInterval) {
+		// Time from the config is in seconds, so it gets multiplied it by 1000 to get it in milliseconds
+		if(this.getTimestamp() - this.lastCheckedTime >=  config.refreshInterval() * 1000) {
 			extractPlayerCountFromHTML();
 		}
 		return this.playerCount;
@@ -68,7 +68,7 @@ public class OsrsPlayerCountWebScraper {
 	 * @throws Exception If scraping failed
 	 */
 	private void extractPlayerCountFromHTML() {
-		log.info("Scraped OSRS homepage player count");
+		log.debug("Scraped OSRS homepage player count");
 		HtmlPage page = null;
 		try {
 			page = webClient.getPage(OSRS_HOMEPAGE_URL);
