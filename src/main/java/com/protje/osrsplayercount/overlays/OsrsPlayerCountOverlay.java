@@ -1,8 +1,7 @@
-package com.osrsplayercount.overlays;
+package com.protje.osrsplayercount.overlays;
 
 import com.google.inject.Inject;
-import com.osrsplayercount.OsrsPlayerCountPlugin;
-import com.osrsplayercount.scraper.OsrsPlayerCountWebScraper;
+import com.protje.osrsplayercount.scraper.OsrsPlayerCountWebScraper;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.TitleComponent;

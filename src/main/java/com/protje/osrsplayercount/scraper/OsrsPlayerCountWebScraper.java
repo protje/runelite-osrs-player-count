@@ -1,15 +1,12 @@
-package com.osrsplayercount.scraper;
+package com.protje.osrsplayercount.scraper;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import com.google.inject.Inject;
-import com.osrsplayercount.OsrsPlayerCountConfig;
+import com.protje.osrsplayercount.OsrsPlayerCountConfig;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

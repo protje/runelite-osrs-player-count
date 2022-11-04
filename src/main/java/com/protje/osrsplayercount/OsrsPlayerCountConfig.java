@@ -1,4 +1,4 @@
-package com.osrsplayercount;
+package com.protje.osrsplayercount;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
