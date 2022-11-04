@@ -9,7 +9,7 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
 import java.awt.*;
 
 public class OsrsPlayerCountOverlay extends OverlayPanel {
-	private final OsrsPlayerCountWebScraper scraper;
+	private OsrsPlayerCountWebScraper scraper;
 
 	@Inject
 	private OsrsPlayerCountOverlay(OsrsPlayerCountWebScraper scraper)
@@ -33,7 +33,7 @@ public class OsrsPlayerCountOverlay extends OverlayPanel {
 	}
 
 	/**
-	 * Renders a title and the given amount of the player count.
+	 * Renders a title and the given amount of playerCount.
 	 * @param playerCount Amount of players
 	 */
 	private void addPlayerCount(final String playerCount) {
