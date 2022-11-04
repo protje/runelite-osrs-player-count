@@ -40,27 +40,23 @@ public class OsrsPlayerCountPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Example started!");
-		String playerCount = scraper.getPlayerCount();
-		log.info(playerCount);
-
+		log.info("Plugin started!");
 		overlayManager.add(playerCountOverlay);
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Example stopped!");
+		log.info("Plugin stopped!");
 
 		overlayManager.remove(playerCountOverlay);
 	}
 
 	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
+	public void onGameStateChanged(GameStateChanged gameStateChanged) throws Exception {
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
-			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
+			scraper.forceGetPlayerCount();
 		}
 	}
 

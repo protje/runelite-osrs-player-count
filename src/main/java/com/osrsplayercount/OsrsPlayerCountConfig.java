@@ -3,17 +3,23 @@ package com.osrsplayercount;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.Range;
 
-@ConfigGroup("example")
+@ConfigGroup("osrs-player-count")
 public interface OsrsPlayerCountConfig extends Config
 {
 	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
+			keyName = "refreshInterval",
+			name = "Refresh interval",
+			description = "Controls the time in seconds before the player count gets retrieved from the OSRS home page.",
+			position = 7
 	)
-	default String greeting()
+	@Range(
+			min = 60,
+			max = 999
+	)
+	default int refreshInterval()
 	{
-		return "Hello";
+		return 60;
 	}
 }
