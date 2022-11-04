@@ -24,14 +24,10 @@ public class OsrsPlayerCountWebScraper {
 
 	@Inject
 	private OsrsPlayerCountConfig config;
-	private final OkHttpClient httpClient;
+	@Inject
+	private OkHttpClient httpClient;
 	private String playerCount = "-";
 	private long lastCheckedTime;
-
-	@Inject
-	public OsrsPlayerCountWebScraper() {
-		this.httpClient = new OkHttpClient.Builder().build();
-	}
 
 	/**
 	 * This retreive the player count taking into account the set refreshInterval
