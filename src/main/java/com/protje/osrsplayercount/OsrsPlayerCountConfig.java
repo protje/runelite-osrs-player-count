@@ -15,7 +15,7 @@ public interface OsrsPlayerCountConfig extends Config
 	)
 	@Range(
 			min = 60,
-			max = 999
+			max = 3600
 	)
 	default int refreshInterval()
 	{
