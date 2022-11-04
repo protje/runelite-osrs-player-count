@@ -40,14 +40,14 @@ public class OsrsPlayerCountPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Plugin started!");
+		log.info("OSRS player count plugin started!");
 		overlayManager.add(playerCountOverlay);
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Plugin stopped!");
+		log.info("OSRS player count plugin stopped!");
 		overlayManager.remove(playerCountOverlay);
 	}
 

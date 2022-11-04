@@ -71,7 +71,7 @@ public class OsrsPlayerCountWebScraper {
 	 * @throws Exception If scraping failed
 	 */
 	private void extractPlayerCountFromHTML() throws Exception {
-		log.info("Scraped");
+		log.info("Scraped OSRS homepage player count");
 		HtmlPage page = webClient.getPage(OSRS_HOMEPAGE_URL);
 		// Scraping based on the class name of the `p` tag on the OSRS homepage
 		final HtmlParagraph playerCountP = (HtmlParagraph) page.getByXPath("//p[@class='player-count']").get(0);
