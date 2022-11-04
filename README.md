@@ -9,6 +9,7 @@ This is a simple runelite plugin that shows the amount of players that are curre
 The plugin works out-of-the box and does not require any extra configuration. There are still some options to change if you wish to do so:
 
 - Refresh interval
+  - Controls the time in seconds before the player count gets retrieved from the OSRS home page.
   - This is default set on 60 seconds
   - Minimum value is 60 seconds (1 minute)
   - Maximum value is 3600 seconds (1 hour)
