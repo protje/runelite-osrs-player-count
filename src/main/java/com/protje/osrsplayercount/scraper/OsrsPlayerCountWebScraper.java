@@ -1,17 +1,15 @@
 package com.protje.osrsplayercount.scraper;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import com.google.inject.Inject;
 import com.protje.osrsplayercount.OsrsPlayerCountConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.jetty.util.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,19 +20,17 @@ import java.util.regex.Pattern;
  */
 public class OsrsPlayerCountWebScraper {
 	static final String OSRS_HOMEPAGE_URL = "https://oldschool.runescape.com/";
-	static final Pattern OSRS_PLAYER_COUNT_PATTERN = Pattern.compile("^There are currently ([\\d,]+) people playing!$");
+	static final Pattern OSRS_PLAYER_COUNT_PATTERN = Pattern.compile("<p class='player-count'>There are currently ([\\d,]+) people playing!</p>", Pattern.DOTALL);
 
 	@Inject
 	private OsrsPlayerCountConfig config;
-	private WebClient webClient;
+	private final OkHttpClient httpClient;
 	private String playerCount = "-";
 	private long lastCheckedTime;
 
 	@Inject
 	public OsrsPlayerCountWebScraper() {
-		this.webClient = new WebClient();
-		this.webClient.getOptions().setCssEnabled(false);
-		this.webClient.getOptions().setJavaScriptEnabled(false);
+		this.httpClient = new OkHttpClient.Builder().build();
 	}
 
 	/**
@@ -62,21 +58,22 @@ public class OsrsPlayerCountWebScraper {
 	 */
 	private Runnable extractPlayerCountFromHTML() {
 		return () -> {
-			log.debug("Scraped OSRS homepage player count");
-			HtmlPage page = null;
+			final Request request = new Request.Builder().url(OSRS_HOMEPAGE_URL).build();
+			final Response response;
+			final String content;
+
 			try {
-				page = webClient.getPage(OSRS_HOMEPAGE_URL);
+				response = httpClient.newCall(request).execute();
+				content = response.body().string();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			// Scraping based on the class name of the `p` tag on the OSRS homepage
-			final HtmlParagraph playerCountP = (HtmlParagraph) page.getByXPath("//p[@class='player-count']").get(0);
-			final String innerHTML = playerCountP.asNormalizedText();
 
 			// By using regex matching we retrieve the correct amount of players
-			final Matcher m = OSRS_PLAYER_COUNT_PATTERN.matcher(innerHTML);
+			final Matcher m = OSRS_PLAYER_COUNT_PATTERN.matcher(content);
 
 			if(m.find()) {
+				log.debug("Scraped OSRS homepage player count");
 				playerCount = m.group(1);
 			} else {
 				log.error("Failed to scrape OSRS homepage player count");
