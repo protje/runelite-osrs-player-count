@@ -23,8 +23,10 @@ public class OsrsPlayerCountOverlay extends OverlayPanel {
 	{
 		panelComponent.getChildren().clear();
 
+		String playerCount = this.scraper.getPlayerCount();
+
 		try {
-			addPlayerCount(this.scraper.getPlayerCount());
+			addPlayerCount(playerCount);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
