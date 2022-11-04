@@ -48,7 +48,6 @@ public class OsrsPlayerCountPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		log.info("Plugin stopped!");
-
 		overlayManager.remove(playerCountOverlay);
 	}
 
@@ -56,6 +55,7 @@ public class OsrsPlayerCountPlugin extends Plugin
 	public void onGameStateChanged(GameStateChanged gameStateChanged) throws Exception {
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
+			// On login we want to get the amount of players
 			scraper.forceGetPlayerCount();
 		}
 	}

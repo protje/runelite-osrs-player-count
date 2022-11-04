@@ -33,7 +33,12 @@ public class OsrsPlayerCountOverlay extends OverlayPanel {
 		return super.render(graphics);
 	}
 
+	/**
+	 * Renders a title and the given amount of the player count.
+	 * @param playerCount Amount of players
+	 */
 	private void addPlayerCount(final String playerCount) {
+		panelComponent.getChildren().add(TitleComponent.builder().text("Players online:").build());
 		panelComponent.getChildren().add(TitleComponent.builder().text(playerCount).build());
 	}
 }
