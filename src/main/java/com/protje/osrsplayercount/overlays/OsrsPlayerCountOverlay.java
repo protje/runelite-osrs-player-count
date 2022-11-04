@@ -9,13 +9,14 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
 import java.awt.*;
 
 public class OsrsPlayerCountOverlay extends OverlayPanel {
+
+	@Inject
 	private OsrsPlayerCountWebScraper scraper;
 
 	@Inject
-	private OsrsPlayerCountOverlay(OsrsPlayerCountWebScraper scraper)
+	private OsrsPlayerCountOverlay()
 	{
 		setPosition(OverlayPosition.TOP_RIGHT);
-		this.scraper = scraper;
 	}
 
 	@Override

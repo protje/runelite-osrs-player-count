@@ -22,15 +22,6 @@ import net.runelite.client.ui.overlay.OverlayManager;
 public class OsrsPlayerCountPlugin extends Plugin
 {
 	@Inject
-	private Client client;
-
-	@Inject
-	private OsrsPlayerCountConfig config;
-
-	@Inject
-	private OsrsPlayerCountWebScraper scraper;
-
-	@Inject
 	private OverlayManager overlayManager;
 
 	@Inject
