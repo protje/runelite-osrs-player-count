@@ -37,13 +37,8 @@ public class OsrsPlayerCountWebScraper {
 		this.webClient.getOptions().setJavaScriptEnabled(false);
 	}
 
-	private long getTimestamp() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		return timestamp.getTime();
-	}
-
 	/**
-	 * This retreive the player count taking into account the set refetchInterval
+	 * This retreive the player count taking into account the set refreshInterval
 	 * @return The amount of OSRS players
 	 */
 	public String getPlayerCount() {
@@ -56,13 +51,9 @@ public class OsrsPlayerCountWebScraper {
 		return this.playerCount;
 	}
 
-	/**
-	 * This retrieves the player count without caring about the set refetchInterval value.
-	 * @return The amount of OSRS players
-	 */
-	public String forceGetPlayerCount() {
-		extractPlayerCountFromHTML();
-		return this.playerCount;
+	private long getTimestamp() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return timestamp.getTime();
 	}
 
 	/**
